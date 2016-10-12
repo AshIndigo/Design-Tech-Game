@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="TileEmodernEBtiles2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="imgs/TileEmodernEBtiles2.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="tile05" tilewidth="32" tileheight="32" tilecount="754" columns="29">
+  <image source="imgs/tile05.png" width="928" height="832"/>
+ </tileset>
+ <tileset firstgid="1011" name="tile07" tilewidth="32" tileheight="32" tilecount="555" columns="15">
+  <image source="imgs/tile07.png" width="480" height="1184"/>
+ </tileset>
+ <layer name="Tile Layer 2" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC/vFxMDwaxSP4lE8YBgA3tOelIQDAAA=
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgwA/esxBQgAf8I6A3lQJ2KQXsMgrYlIBR/xLPHiz+pWX6hwEA8Y/KaIQDAAA=
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../SlickEngine/testdata/grass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="rocks" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../SlickEngine/testdata/rocks.png" width="128" height="128"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="10" height="10">
+  <data encoding="csv">
+22,22,22,22,22,22,22,22,22,22,
+22,14,14,14,14,14,14,14,14,22,
+22,14,14,14,14,14,14,14,14,22,
+22,14,14,22,22,22,22,14,14,22,
+22,14,14,22,14,14,22,14,14,22,
+22,14,14,22,14,14,22,14,14,22,
+22,14,14,22,22,22,22,14,14,22,
+22,14,14,14,14,14,14,14,14,22,
+22,14,14,14,14,14,14,14,14,22,
+22,22,22,22,22,22,22,22,22,22
+</data>
+ </layer>
+</map>
