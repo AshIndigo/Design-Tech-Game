@@ -18,7 +18,8 @@
   </tile>
   <tile id="116">
    <properties>
-    <property name="isWorkComp" type="bool" value="true"/>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="dialogue" value="useWorkComp"/>
    </properties>
   </tile>
  </tileset>

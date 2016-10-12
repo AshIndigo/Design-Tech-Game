@@ -72,6 +72,7 @@ public class MainGame extends BasicGame {
         right = new Animation(movementRight, duration, false); 
         sprite = right;
         dialogue.put("", "");
+        dialogue.put("useWorkComp", "Do your job?\n\nPress P to work");
         dialogue.put("playComp", "Play a round of your favorite RTS? \n\n Press P to skip work");
         dialogue.put("roadFlower", "A red flower.\nIt reminds you of that rpg game in\n Guertena's Works.");
     }
@@ -141,8 +142,18 @@ public class MainGame extends BasicGame {
 					System.out.println("Addiction: " + addiction);
 					System.out.println("Job Mistakes: " + jobMistakes);
 					day++;
+					System.out.println(day);
+					this.triggerMapChange("house");
+			} else {
+				if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "dialogue", "").equals("useWorkComp")) {
+					System.out.println("You went to work!");
+					if (addiction != 0) addiction--;
+					System.out.println("Addiction: " + addiction);
+					System.out.println("Job Mistakes: " + jobMistakes);
+					day++;
 					this.triggerMapChange("house");
 			}
+		}
 		}
 		//System.out.println("Jack X: " + x);
 	//	System.out.println("Jack Y: " + y);
@@ -159,14 +170,21 @@ public class MainGame extends BasicGame {
 		txtf.setTextColor(Color.white);
 		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", "").equals("playComp")) {
 			if (day <= 5) {
+			//	System.out.println("Norm Diag");
 				txtf.setText(dialogue.get("playComp"));
-			} else {
-				txtf.setText("You are completely addicted to the machine\nYou cant stop \nYou severed connections with all your friends \nThis is your fate");
-			}
-		} else {
-			String str = grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", "");
-			txtf.setText(dialogue.get(str));
+			} else { 
+				System.out.println("Its not day <= 5");
+					txtf.setText("You are completely addicted to the machine\nYou cant stop \nYou severed connections with all your friends \nThis is your fate");
+			} 
 		}
+		
+		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "dialogue", "").equals("useWorkComp")) {
+			if (day <= 5) {
+				txtf.setText(dialogue.get("useWorkComp")); 
+			} else {
+				txtf.setText("You decided to go to work\nYour life is stable\nThis feels like the best route for your life\nYour not addicted");
+			}
+		} 
 		txtf.setBorderColor(Color.black);
 		txtf.setBackgroundColor(Color.black);
 		txtf.render(gc, gc.getGraphics());
@@ -174,7 +192,7 @@ public class MainGame extends BasicGame {
 	}
 
 	/**
-	 * Loads a map and sets Jack to 34, 34
+	 * Loads a map and sets position based on map values
 	 * @param string The map file name
 	 * @throws SlickException
 	 */
