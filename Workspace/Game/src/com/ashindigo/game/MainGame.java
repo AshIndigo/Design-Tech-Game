@@ -39,6 +39,8 @@ public class MainGame extends BasicGame {
 	// Story counters!
 	int jobMistakes = 0;
 	int addiction = 0;
+	private boolean ending = false;
+	private Object currentEnding;
 
     public MainGame() {
         super("Design Tech Game");
@@ -75,13 +77,28 @@ public class MainGame extends BasicGame {
         dialogue.put("useWorkComp", "Do your job?\n\nPress P to work");
         dialogue.put("playComp", "Play a round of your favorite RTS? \n\n Press P to skip work");
         dialogue.put("roadFlower", "A red flower.\nIt reminds you of that rpg game in\n Guertena's Works.");
+        dialogue.put("neutralGame", "You went to work at times\nYou managed to keep your job despite you not showing up\nIn the end you chose the game over your job.");
+        dialogue.put("neutralWork", "You skipped work at times\nBut you refused to let the game take over your life\nThis is ok.");
+        dialogue.put("noAddiction", "You decided to go to work\nYour life is stable\nThis feels like the best route for your life\nYour not addicted");
+        dialogue.put("addictionEnding", "You are completely addicted to the machine\nYou cant stop \nYou severed connections with all your friends \nThis is your fate");
     }
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 	      grassMap.render(0, 0);
-	      sprite.draw(x, y);
+	      if (ending == false) {
+	    	  sprite.draw(x, y);
+	      }
 	      triggerDialogue();
+	      if (ending == true) {
+	    	TextField txtf = new TextField(gc, gc.getDefaultFont(), 0, 0, 480, 720);
+	  		txtf.setTextColor(Color.white);
+	  		txtf.setBorderColor(Color.black);
+			txtf.setBackgroundColor(Color.black);
+			txtf.setText(dialogue.get(currentEnding));
+			txtf.render(gc, gc.getGraphics());
+			txtf.deactivate();
+	      }
 	}
 
 	@Override
@@ -162,22 +179,21 @@ public class MainGame extends BasicGame {
 	/**
 	 * Triggers a dialogue box
 	 * @param string Selects which dialogue to load
+	 * @throws SlickException 
 	 */
-	private void triggerDialogue() {
+	private void triggerDialogue() throws SlickException {
+		try {
 		int x = (int) (this.x / grassMap.getTileWidth());
 		int y = (int) (this.y / grassMap.getTileHeight());
 		TextField txtf = new TextField(gc, gc.getDefaultFont(), 0, 520, 520, 100);
 		txtf.setTextColor(Color.white);
 		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", "").equals("playComp")) {
 			if (day <= 5) {
-			//	System.out.println("Norm Diag");
 				txtf.setText(dialogue.get("playComp"));
-			} else if (addiction < 4) {
-					System.out.println("Neutral Game Ending");
-					txtf.setText("GAME"); 
+			} else if (addiction < 5 && addiction != 0) {
+				this.triggerEnding("neutralGame");
 			} else { 
-				System.out.println("Addicted Ending");
-					txtf.setText("You are completely addicted to the machine\nYou cant stop \nYou severed connections with all your friends \nThis is your fate");
+				this.triggerEnding("addictionEnding");
 			} 
 		}
 	
@@ -186,17 +202,24 @@ public class MainGame extends BasicGame {
 			if (day <= 5) {
 				txtf.setText(dialogue.get("useWorkComp")); 
 			} else if (addiction == 0) {
-				System.out.println("No addiction ending");
-				txtf.setText("You decided to go to work\nYour life is stable\nThis feels like the best route for your life\nYour not addicted");
+				this.triggerEnding("noAddiction");
 			} else {
-				System.out.println("Neutral Work Ending!");
-				txtf.setText("Netural Work Ending");
+				this.triggerEnding("neutralWork");
 			}
 		} 
 		txtf.setBorderColor(Color.black);
 		txtf.setBackgroundColor(Color.black);
 		txtf.render(gc, gc.getGraphics());
 		txtf.deactivate();
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			this.triggerMapChange("void");
+			TimerThread tt = new TimerThread(Timer.ONE_SECOND * 10);
+			tt.start();
+			app.setTitle("W̟͎̫͟é͕͕l̡͖̯̠͖c̱̲͖̼o̱̮̯̦̻̪͠m̧ẹ̝̦̯͍̱̠́ ̠̺̮̭̤́t͉̖̻͖͔̀ọ ͚͚̝t̴̩h̤̀e ͈͜v̞̳͟ǫ͔͖̰̥̯͍̣id");
+			this.x = 230;
+			this.y = 200;
+		}
 	}
 
 	/**
@@ -209,6 +232,26 @@ public class MainGame extends BasicGame {
 		grassMap.render(0, 0);
 		x = Integer.parseInt(grassMap.getMapProperty("x", "0"));
 		y = Integer.parseInt(grassMap.getMapProperty("y", "0"));
+	}
+	
+	/**
+	 * Triggers a full screen ending
+	 * @param ending The ending that will be started
+	 * @throws SlickException 
+	 */
+	private void triggerEnding(String ending) throws SlickException {
+		this.ending = true;
+  	    this.gc.getGraphics().clear();
+		this.triggerMapChange("void");
+		sprite = null;
+		switch (ending) {
+		default: System.out.println("No Ending"); break;
+		case "neutralGame": System.out.println("Neutral Game Ending"); currentEnding = ending; 	app.setTitle("his"); break;
+		case "neutralWork": System.out.println("Neutral Work Ending"); currentEnding = ending; 	app.setTitle("Under"); break;
+		case "addictionEnding": System.out.println("Addiction Ending"); currentEnding = ending; app.setTitle("8643"); break;
+		case "noAddiction": System.out.println("No Addiction Ending"); currentEnding = ending; 	app.setTitle("Desk"); break;
+		}
+		
 	}
 	
 	/**
