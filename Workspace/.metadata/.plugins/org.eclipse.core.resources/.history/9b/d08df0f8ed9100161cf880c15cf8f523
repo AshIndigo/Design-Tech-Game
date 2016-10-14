@@ -174,12 +174,11 @@ public class MainGame extends BasicGame {
 				txtf.setText(dialogue.get("playComp"));
 			} else if (addiction < 4) {
 					System.out.println("Neutral Game Ending");
-					txtf.setText("GAME"); 
+					txtf.setText("You decided to go to work\nYour life is stable\nThis feels like the best route for your life\nYour not addicted"); 
 			} else { 
 				System.out.println("Addicted Ending");
 					txtf.setText("You are completely addicted to the machine\nYou cant stop \nYou severed connections with all your friends \nThis is your fate");
 			} 
-		}
 	
 		
 		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "dialogue", "").equals("useWorkComp")) {

@@ -193,6 +193,7 @@ public class MainGame extends BasicGame {
 				txtf.setText("Netural Work Ending");
 			}
 		} 
+		}
 		txtf.setBorderColor(Color.black);
 		txtf.setBackgroundColor(Color.black);
 		txtf.render(gc, gc.getGraphics());

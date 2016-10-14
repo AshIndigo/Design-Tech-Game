@@ -179,7 +179,6 @@ public class MainGame extends BasicGame {
 				System.out.println("Addicted Ending");
 					txtf.setText("You are completely addicted to the machine\nYou cant stop \nYou severed connections with all your friends \nThis is your fate");
 			} 
-		}
 	
 		
 		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "dialogue", "").equals("useWorkComp")) {
