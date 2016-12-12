@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
+ <properties>
+  <property name="x" type="int" value="230"/>
+  <property name="y" type="int" value="200"/>
+ </properties>
  <tileset firstgid="1" name="void" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="imgs/void.png" width="32" height="32"/>
  </tileset>
@@ -9,6 +13,11 @@
   </data>
  </layer>
  <layer name="Tile Layer 2" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBQMJAAA7Ly31YQDAAA=
+  </data>
+ </layer>
+ <layer name="doors" width="15" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBQMJAAA7Ly31YQDAAA=
   </data>

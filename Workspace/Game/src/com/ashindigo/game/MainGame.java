@@ -26,6 +26,8 @@ import org.newdawn.slick.tiled.TiledMap;
  * http://opengameart.org/content/pixel-worker-sprite-fukushima
  * http://www.rpgmakercentral.com/topic/17819-critique-on-unique-trees-and-tiles/	
  * http://opengameart.org/content/basic-door-32x32
+ * http://opengameart.org/content/48-animated-old-school-rpg-characters-16x16
+ * http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generatord
  */
 public class MainGame extends BasicGame {
     private TiledMap grassMap;
@@ -39,8 +41,9 @@ public class MainGame extends BasicGame {
 	// Story counters!
 	int jobMistakes = 0;
 	int addiction = 0;
+	Input input;
 	private boolean ending = false;
-	private Object currentEnding;
+	private String currentEnding;
 
     public MainGame() {
         super("Design Tech Game");
@@ -60,7 +63,7 @@ public class MainGame extends BasicGame {
 
     @Override
     public void init(GameContainer container) throws SlickException {
-   
+    	input = container.getInput();
         Image [] movementUp = {new Image("data/manUpRightStill.png"), new Image("data/manUpMove.png")};
         Image [] movementDown = {new Image("data/manLeftStill.png"), new Image("data/manLeftMove.png")};
         Image [] movementLeft = {new Image("data/manLeftStill.png"), new Image("data/manLeftMove.png")};
@@ -103,9 +106,7 @@ public class MainGame extends BasicGame {
 
 	@Override
 	public void update(GameContainer paramGameContainer, int paramInt) throws SlickException {
-		// Manages movement
-		Input input = paramGameContainer.getInput();
-		if (input.isKeyDown(Input.KEY_UP)) {
+		if (input.isKeyDown(Input.KEY_UP)) { // Controls collision for going up
 			if (this.isCollidable() == false) {
 				sprite = up;
 				sprite.update(paramInt);
@@ -116,7 +117,7 @@ public class MainGame extends BasicGame {
 		    	y += paramInt * 0.1f;
 			}
 		}
-		else if (input.isKeyDown(Input.KEY_DOWN)) {
+		else if (input.isKeyDown(Input.KEY_DOWN)) { // Controls for going down
 			if (this.isCollidable() == false) {
 				sprite = down;
 		    	sprite.update(paramInt);
@@ -127,7 +128,7 @@ public class MainGame extends BasicGame {
 		    	y -= paramInt * 0.1f;
 			}
 		}
-		else if (input.isKeyDown(Input.KEY_LEFT)) {
+		else if (input.isKeyDown(Input.KEY_LEFT)) { // Controls for going left
 			if (this.isCollidable() == false) {
 				sprite = left;
 				sprite.update(paramInt);
@@ -138,7 +139,7 @@ public class MainGame extends BasicGame {
 				x += paramInt * 0.1f;
 			}
 		}
-		else if (input.isKeyDown(Input.KEY_RIGHT)) {
+		else if (input.isKeyDown(Input.KEY_RIGHT)) { // Controls for going right
 			if (this.isCollidable() == false) {
 				sprite = right;
 				sprite.update(paramInt);
@@ -149,36 +150,26 @@ public class MainGame extends BasicGame {
 				x -= paramInt * 0.1f;
 			}
 		}
-		if (input.isKeyPressed(Input.KEY_P)) {
+		if (input.isKeyPressed(Input.KEY_P)) { // Controls the variables for interacting with objects
 			int x = (int) (this.x / grassMap.getTileWidth());
 			int y = (int) (this.y / grassMap.getTileHeight());
 				if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", "").equals("playComp")) {
-					System.out.println("You skipped Work!");
 					addiction++;
 					jobMistakes++;
-					System.out.println("Addiction: " + addiction);
-					System.out.println("Job Mistakes: " + jobMistakes);
 					day++;
-					System.out.println(day);
 					this.triggerMapChange("house");
 			} else {
 				if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "dialogue", "").equals("useWorkComp")) {
-					System.out.println("You went to work!");
 					if (addiction != 0) addiction--;
-					System.out.println("Addiction: " + addiction);
-					System.out.println("Job Mistakes: " + jobMistakes);
 					day++;
 					this.triggerMapChange("house");
 			}
 		}
 		}
-		//System.out.println("Jack X: " + x);
-	//	System.out.println("Jack Y: " + y);
 	}
 	
 	/**
 	 * Triggers a dialogue box
-	 * @param string Selects which dialogue to load
 	 * @throws SlickException 
 	 */
 	private void triggerDialogue() throws SlickException {
@@ -187,7 +178,7 @@ public class MainGame extends BasicGame {
 		int y = (int) (this.y / grassMap.getTileHeight());
 		TextField txtf = new TextField(gc, gc.getDefaultFont(), 0, 520, 520, 100);
 		txtf.setTextColor(Color.white);
-		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", "").equals("playComp")) {
+		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", "").equals("playComp")) { // Jack's computer triggers
 			if (day <= 5) {
 				txtf.setText(dialogue.get("playComp"));
 			} else if (addiction < 5 && addiction != 0) {
@@ -195,10 +186,10 @@ public class MainGame extends BasicGame {
 			} else { 
 				this.triggerEnding("addictionEnding");
 			} 
+		} else if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", "").equals(dialogue.get(grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", ""))) == false) {
+			txtf.setText(dialogue.get(grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 2")), "dialogue", ""))); // For dialogue outside of main story objects
 		}
-	
-		
-		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "dialogue", "").equals("useWorkComp")) {
+		if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "dialogue", "").equals("useWorkComp")) { // Work Computer triggers
 			if (day <= 5) {
 				txtf.setText(dialogue.get("useWorkComp")); 
 			} else if (addiction == 0) {
@@ -206,15 +197,28 @@ public class MainGame extends BasicGame {
 			} else {
 				this.triggerEnding("neutralWork");
 			}
-		} 
-		txtf.setBorderColor(Color.black);
+		}
+			if (grassMap.getTileProperty(grassMap.getTileId(x, y, grassMap.getLayerIndex("Tile Layer 1")), "character", "").equals("lisa")) { // Decides Lisa's dialogue
+				switch(jobMistakes) {
+					default: txtf.setText("Hi Jack!\nNice day outside right?"); break;
+					case 0: txtf.setText("Hi Jack!\n Nice day outside right?"); break;
+					case 1: txtf.setText("Try to make it to work Jack\nI know you need this job"); break;
+					case 2: txtf.setText("The boss is worried about\nyour work habits\nPlease dont keep this up"); break;
+					case 3: txtf.setText("Your skipping work because of that game right?\nPlease dont do this to yourself"); break;
+					case 4: txtf.setText("The boss wants to see you..."); break;
+					case 5: txtf.setText("Good luck Jack"); break;
+					case 6: txtf.setText("Why are you here?"); break;
+					case 8643: txtf.setText(". . ."); break; 
+				}
+			} 
+		txtf.setBorderColor(Color.black); // Sets standard text stuff
 		txtf.setBackgroundColor(Color.black);
 		txtf.render(gc, gc.getGraphics());
 		txtf.deactivate();
-		} catch (IndexOutOfBoundsException e) {
+		} catch (IndexOutOfBoundsException e) { // I wasted time making this
 			e.printStackTrace();
 			this.triggerMapChange("void");
-			TimerThread tt = new TimerThread(Timer.ONE_SECOND * 10);
+			TimerThread tt = new TimerThread(Timer.ONE_SECOND * 10); // Multithreading just for a timer
 			tt.start();
 			app.setTitle("W̟͎̫͟é͕͕l̡͖̯̠͖c̱̲͖̼o̱̮̯̦̻̪͠m̧ẹ̝̦̯͍̱̠́ ̠̺̮̭̤́t͉̖̻͖͔̀ọ ͚͚̝t̴̩h̤̀e ͈͜v̞̳͟ǫ͔͖̰̥̯͍̣id");
 			this.x = 230;

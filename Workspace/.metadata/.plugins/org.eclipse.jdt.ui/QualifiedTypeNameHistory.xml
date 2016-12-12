@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 <fullyQualifiedTypeName name="com.google.common.collect.Multimap"/>
 <fullyQualifiedTypeName name="com.google.common.collect.ArrayListMultimap"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.lwjgl.util.Timer"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
 <fullyQualifiedTypeName name="javax.swing.Timer"/>
@@ -17,4 +16,5 @@
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

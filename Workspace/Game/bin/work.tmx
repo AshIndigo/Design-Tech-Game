@@ -1,13 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
+ <properties>
+  <property name="x" type="int" value="116"/>
+  <property name="y" type="int" value="430"/>
+ </properties>
  <tileset firstgid="1" name="TileEmodernEBtiles2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="imgs/TileEmodernEBtiles2.png" width="512" height="512"/>
+  <tile id="0">
+   <properties>
+    <property name="y" type="int" value="200"/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="isWorkComp" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="116">
+   <properties>
+    <property name="Collision" type="bool" value="true"/>
+    <property name="dialogue" value="useWorkComp"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="257" name="tile05" tilewidth="32" tileheight="32" tilecount="754" columns="29">
   <image source="imgs/tile05.png" width="928" height="832"/>
  </tileset>
  <tileset firstgid="1011" name="tile07" tilewidth="32" tileheight="32" tilecount="555" columns="15">
   <image source="imgs/tile07.png" width="480" height="1184"/>
+  <tile id="252">
+   <properties>
+    <property name="mapName" value="road"/>
+   </properties>
+  </tile>
+  <tile id="267">
+   <properties>
+    <property name="mapName" value="road"/>
+   </properties>
+  </tile>
+  <tile id="465">
+   <properties>
+    <property name="mapName" value="boss"/>
+   </properties>
+  </tile>
+  <tile id="480">
+   <properties>
+    <property name="mapName" value="boss"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="1566" name="lisaChar" tilewidth="32" tileheight="32" tilecount="1092" columns="26">
+  <image source="imgs/lisasheet.png" width="832" height="1344"/>
+  <tile id="104">
+   <properties>
+    <property name="character" value="lisa"/>
+   </properties>
+  </tile>
+  <tile id="105">
+   <properties>
+    <property name="character" value="lisa"/>
+   </properties>
+  </tile>
+  <tile id="130">
+   <properties>
+    <property name="character" value="lisa"/>
+   </properties>
+  </tile>
+  <tile id="131">
+   <properties>
+    <property name="character" value="lisa"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tile Layer 2" width="15" height="15">
   <data encoding="base64" compression="gzip">
@@ -16,7 +79,12 @@
  </layer>
  <layer name="Tile Layer 1" width="15" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgwA/esxBQgAf8I6A3lQJ2KQXsMgrYlIBR/xLPHiz+pWX6hwEA8Y/KaIQDAAA=
+   H4sIAAAAAAAAC2NgGDiQSgG7lAJ2GQVsSsBA+reNjYGhnY08/y4A6lvIxkAyGGnxSy4AAPvF9cqEAwAA
+  </data>
+ </layer>
+ <layer name="doors" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgIB4cYSVBMRq4TIHeUTAK6Anes5Cv9x8ZegEbgrnWhAMAAA==
   </data>
  </layer>
 </map>

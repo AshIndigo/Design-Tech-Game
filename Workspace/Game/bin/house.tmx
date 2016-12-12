@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="32" tileheight="32" nextobjectid="10">
+ <properties>
+  <property name="x" type="int" value="116"/>
+  <property name="y" type="int" value="153"/>
+ </properties>
  <tileset firstgid="1" name="house_inside" tilewidth="32" tileheight="32" tilecount="224" columns="16">
   <image source="imgs/house_inside.png" width="512" height="448"/>
+  <tile id="31">
+   <properties>
+    <property name="mapName" value="road"/>
+   </properties>
+  </tile>
+  <tile id="47">
+   <properties>
+    <property name="mapName" value="road"/>
+   </properties>
+  </tile>
   <tile id="82">
    <properties>
     <property name="Collision" type="bool" value="true"/>
@@ -78,9 +92,20 @@
  </tileset>
  <tileset firstgid="241" name="TileEmodernEBtiles2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="imgs/TileEmodernEBtiles2.png" width="512" height="512"/>
+  <tile id="5">
+   <properties>
+    <property name="mapName" value="backyard"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="mapName" value="backyard"/>
+   </properties>
+  </tile>
   <tile id="43">
    <properties>
     <property name="Collision" type="bool" value="true"/>
+    <property name="dialogue" value="playComp"/>
    </properties>
   </tile>
   <tile id="100">
@@ -141,7 +166,12 @@
  </layer>
  <layer name="Tile Layer 3" width="15" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoC9QwCKWi8QOZcSt14CA2al49I6CUUAKUKBAL6F0ig4AyG+OxIQDAAA=
+   H4sIAAAAAAAAC2NgGHiQi8QOZSTfnFQK9I6CUTBQAADmqb4ThAMAAA==
+  </data>
+ </layer>
+ <layer name="doors" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoB/4RoFeNkaqOWMUjAK8QIECvQZk6AEALVFEsoQDAAA=
   </data>
  </layer>
 </map>
